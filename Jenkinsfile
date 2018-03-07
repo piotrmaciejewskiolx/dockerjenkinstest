@@ -16,15 +16,15 @@ pipeline {
                 sh 'docker run --rm dockerstack:test vendor/bin/phpunit'
             }
         }
-     }
-     stage('Build staging image') {
-         when {
-             expression {
-                 env.BRANCH_NAME == 'master' && params.staging == true
+        stage('Build staging image') {
+             when {
+                 expression {
+                     env.BRANCH_NAME == 'master' && params.staging == true
+                 }
              }
-         }
-         steps {
-             sh 'docker build -f "Dockerfile.test" -t "dockerstack:staging" .'
+             steps {
+                 sh 'docker build -f "Dockerfile.test" -t "dockerstack:staging" .'
+             }
          }
      }
 }
