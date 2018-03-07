@@ -1,0 +1,17 @@
+FROM webdevops/php-nginx-dev:alpine-php7
+
+RUN /usr/local/bin/apk-install php7-pdo_mysql
+
+ENV NYX_ENVIRONMENT "test"
+
+ENV PHP_DEBUGGER "xdebug"
+ENV WEB_DOCUMENT_ROOT "/app/public"
+ENV WEB_DOCUMENT_INDEX "index.php"
+ENV WEB_ALIAS_DOMAIN "nyx.pl"
+ENV PHP_DATE_TIMEZONE "Europe/Warsaw"
+
+COPY . /app
+
+WORKDIR /app
+
+RUN composer installl --no-progress -o
